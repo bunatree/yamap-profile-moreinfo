@@ -23,7 +23,7 @@ Web版のユーザープロフィールページに、下図のような補足�
 ### 1. 必要な準備
 
 - ブラウザーに [Tampermonkey](https://www.tampermonkey.net/) 拡張機能をインストール
-- Chrome の場合は「拡張機能」→「デベロッパーモード」をON
+- Chrome の場合は、右上の [⋮] メニュー → [拡張機能] → [拡張機能を管理] → 右上の [デベロッパーモード] スイッチをON
 
 ### 2. スクリプトの導入
 
@@ -33,7 +33,7 @@ Web版のユーザープロフィールページに、下図のような補足�
 
 | 変数名               | 説明 |
 |----------------------|------|
-| `obtainDataMethod`   | `localJson` または `googleSpreadsheet` を指定 |
+| `obtainDataMethod`   | `localJson` ... 補足情報をスクリプト内に記述する場合<br>`googleSpreadsheet` ... 補足情報をGoogleスプレッドシートに記述する場合 |
 | `userData`           | `localJson` を選んだ場合、ここに補足情報を記述（後述の 3. を参照） |
 | `googleSpreadsheetId` or `googleSpreadsheetUrl` | スプレッドシート利用時にどちらかを指定（後述の 4. を参照）|
 | `insertPosition`     | 表示位置（`before` または `after`） |
@@ -43,7 +43,11 @@ https://yamap.com/users/NNNN
 
 ### 3. スクリプト内に補足情報を記載する方法
 
-`obtainDataMethod` で `localJson` を指定する場合の記載方法です。
+`obtainDataMethod` で `localJson` を指定してください。
+
+```js
+const obtainDataMethod = 'localJson';
+```
 
 下記は、IDが「1234」と「5678」の2名のユーザーに関する例です。
 
@@ -71,11 +75,15 @@ const localUserData = {
 
 ### 4. Google スプレッドシートからデータを読み込む方法
 
-`obtainDataMethod` で `googleSpreadsheet` を指定する場合の記載方法です。
+`obtainDataMethod` で `googleSpreadsheet` を指定してください。
+
+```js
+const obtainDataMethod = 'googleSpreadsheet';
+```
 
 下記は、IDが「1234」と「5678」の2名のユーザーに関する例です。
 
-1. Google スプレッドシートを作成し、以下のような形式で記述します：
+1. Google スプレッドシートを作成し、以下のような形式で記述します。
 
 | userId | label      | value        | url                          |
 |--------|------------|--------------|-------------------------------|
@@ -115,8 +123,8 @@ const localUserData = {
 
 ## 🛠️ 開発の経緯
 
-YAMAPのユーザーといつどこでお会いしたのか忘れてしまうことはありませんか？ 私自身が忘れっぽいことに加えて、ユーザー名が Facebook や ヤマレコ など他のSNSのユーザー名と異なるため、混乱することも多いです。
+YAMAPのユーザーといつどこでお会いしたのか忘れてしまうことはありませんか？ 私自身が忘れっぽいことに加えて、ユーザー名がFacebookや ヤマレコ など他のSNSのユーザー名と異なるため、混乱することも多いです。
 
 「いつどこでお会いしたのか」「他のSNSのどのユーザーとつながっているのか」を一元管理できるデータベースのようなものが欲しいと考えました。YAMAPのプロフィールページに補足情報を追加することで、これを実現できるのではないかと思い、このスクリプトを開発しました。
 
-このスクリプトを使うことで、他のユーザーとの再会時に話題をスムーズに共有できるようになると考えています。
+このスクリプトを使うことで、他のユーザーとの再会時に話題をスムーズに共有できるようになると考えています😃
